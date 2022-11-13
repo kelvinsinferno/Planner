@@ -1,20 +1,14 @@
-//global variables
-var dayTimeEl = $("#currentDay");
-// var currentHourEl = $("#currentHour")
+var time = $("#currentDay");
 var textAreaEl = $("#appointment");
 var hours = [$("#09"), $("#10"), $("#11"), $("#12"), $("#13"), $("#14"), $("#15"), $("#16"), $("#17")];
 
 //time
 var today = moment().format("llll");
-var time = moment().format("LT");
-console.log(time);
-var rn = time.startOf('hour');
-dayTimeEl.text(today);
-// currentHourEl.text(rn);
+var rn = moment().hour();
+time.text(today);
 
 // WHEN I refresh the page THEN the saved events persist
-//Each timeblock is color coded to indicate whether it is in the past, present, or future
-// currentTime = moment().hour();
+//timeblock color 
 currentTime = rn; 
 
 function timeBlockColor() {
@@ -36,15 +30,15 @@ function timeBlockColor() {
 
 timeBlockColor();
 
-// Save button sets information in local storage
+// saveBtn
 $(".saveBtn").on("click", function() {
-    var userInput = $(this).siblings("textarea");
-    localStorage.setItem(userInput.parent().attr("id"), JSON.stringify(userInput.val()));
+    var input = $(this).siblings("textarea");
+    localStorage.setItem(input.parent().attr("id"), JSON.stringify(input.val()));
     console.log("save button working?");
 })
 
 
-//A clear button next to the save button removes info from local storage
+//deleteBtn
 $(".deleteBtn").on("click", function() {
     var textArea = $(this).siblings("textarea");
     textArea.val("");
